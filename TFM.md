@@ -11,9 +11,9 @@ This project uses ‘Sex’ and ‘Gender’ interexchangebly. This is because t
 
 At first glance, both Female and Male do not seem to have fundamental differences on its material deprivation distribution. The likelihood of depravation for females is 4.53% whereas for males is 4.38%. This meagre difference fails to pass a 95% confidence test of significance.
 
+*Material deprivation distribution by sex*
 ![](https://github.com/deividvalerius/Wealth-Estimator/blob/master/Images/sex_md.jpg?raw=true)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzMyNTY1MjY2LDE3MDQ4ODA3MzksMjA4MD
-I5NjQxMV19
+eyJoaXN0b3J5IjpbMjA0NDczMDM3M119
 -->
