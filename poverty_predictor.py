@@ -17,10 +17,9 @@ st.title('Multidimensional Poverty Predictor')
 
 # Description
 st.markdown('''
-What drives poverty in Spain? Find out about the relationship between poverty and other variables among the Spanish adult population. This app helps you perform in depth statistical analysis on this topic and more. You can try the poverty predictor model as well!\n
+What drives poverty in Spain? Find out about the relationship between poverty and other variables among the Spanish adult population. This app allows you to explore poverty statistics in depth. You can also try the poverty predictor model as well!\n
 The data for this project was retrieved from the 2019 Income and Living Conditions survey conducted by the INE
 (*Instituto Nacional de Estadistica*), Spain's official agency for statistical services.\n
-This survey aims at collecting information on income, poverty, social exclusion and living conditions.\n
 * **Python libraries**: streamlit, pandas, numpy, matplotlib, seaborn, sklearn
 * **Data Source**: [ine.es](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176807&menu=ultiDatos&idp=1254735976608)\n
 Access to GitHub repo [here](https://github.com/deividvalerius/Multidimensional-Poverty-Predictor)
@@ -144,7 +143,7 @@ var_description.write('''
 **Occupation**: Job classification inside the International Standard Classification of Occupation major groups.\n
 **Years worked**: Total number of years in employment.\n
 **Hours a week worked**: Total number of hours a week work on average in any job.\n
-**Adjusted income**: Annual household income divided by unit of consumption (1 + (other people older than 14 * 0.5) + (other people 14 or younger * 0.3)). *Intuitively*: Annual income to maintain lifestyle if living alone.\n
+**Adjusted income**: Annual household income divided by unit of consumption (1 + (other people older than 14 x 0.5) + (other people 14 or younger x 0.3)). *Intuitively*: Annual income to maintain lifestyle if living alone.\n
 **Proportion of social welfare**: Proportion of annual income coming from welfare benefits.
 ''')
 
