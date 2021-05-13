@@ -26,7 +26,7 @@ This survey aims at collecting information on income, poverty, social exclusion 
 ''')
 
 #Loading data from Git Repo
-url = 'https://raw.githubusercontent.com/deividvalerius/Wealth-Estimator/master/Data/variables.csv'
+url = 'https://raw.githubusercontent.com/deividvalerius/Multidimensional-Poverty-Predictor/master/Data/variables.csv'
 df = pd.read_csv(url)
 
 #Creating sidebar for interactive user imputation
@@ -361,7 +361,7 @@ if one_variable_button == False:
         pass
 
 # Subtitle for the prediction option
-st.subheader('Check out the predictive model for material deprvation!')
+st.subheader('Check out the predictive model for material deprivation!')
 #model = st.beta_expander("Expand")
 
 # Setting variable inputs for prediction
@@ -384,7 +384,7 @@ with st.beta_container():
     model_selected_adjusted_income = col3.slider('Adjusted income', -20000, 180000, -20000, 1000)
     model_selected_proportion_social_welfare = col4.slider('% social welfare', 0.0, 1.0, 0.0, 0.01)
 
-url2 = 'https://raw.githubusercontent.com/deividvalerius/Wealth-Estimator/master/Data/to_model.csv'
+url2 = 'https://raw.githubusercontent.com/deividvalerius/Multidimensional-Poverty-Predictor/master/Data/to_model.csv'
 to_model = pd.read_csv(url2)
 
 X = to_model.drop(['material_deprivation'], axis=1)
