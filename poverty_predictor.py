@@ -13,16 +13,17 @@ from sklearn.tree import DecisionTreeClassifier
 st.set_page_config(layout="wide")
 
 # Title
-st.title('Income and living conditions in Spain')
+st.title('Multidimensional Poverty Predictor')
 
 # Description
 st.markdown('''
-Find out about Spain's income and living conditions for its adult population!. This app helps you perform in depth statistical analysis on the variables affecting these topics.\n
-The data has been retrieved from the 2019 Income and Living Conditions survey conducted by the INE
+What drives poverty in Spain? Find out about the relationship between poverty and other variables among the Spanish adult population. This app helps you perform in depth statistical analysis on this topic and more. You can try the poverty predictor model as well!\n
+The data for this project was retrieved from the 2019 Income and Living Conditions survey conducted by the INE
 (*Instituto Nacional de Estadistica*), Spain's official agency for statistical services.\n
 This survey aims at collecting information on income, poverty, social exclusion and living conditions.\n
 * **Python libraries**: streamlit, pandas, numpy, matplotlib, seaborn, sklearn
-* **Data Source**: [ine.es](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176807&menu=ultiDatos&idp=1254735976608)
+* **Data Source**: [ine.es](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176807&menu=ultiDatos&idp=1254735976608)\n
+Access to GitHub repo [here](https://github.com/deividvalerius/Multidimensional-Poverty-Predictor)
 ''')
 
 #Loading data from Git Repo
@@ -30,7 +31,7 @@ url = 'https://raw.githubusercontent.com/deividvalerius/Multidimensional-Poverty
 df = pd.read_csv(url)
 
 #Creating sidebar for interactive user imputation
-st.sidebar.header('User Input Features')
+st.sidebar.header('Select variables to filter')
 
 #Sidebar - Sex
 sex = sorted(df.sex.unique())
@@ -113,6 +114,40 @@ selected_df = df[df.sex.isin(selected_sex)
             & df.adjusted_income.between(selected_adjusted_income[0], selected_adjusted_income[1])
             & df.proportion_social_welfare.between(selected_proportion_social_welfare[0], selected_proportion_social_welfare[1])].reset_index(drop=True)
 
+#Explanatory text
+mat_description = st.beta_expander("What is multidimensional poverty?")
+mat_description.write('''
+**Material deprivation**: Is the target variable of this project. Is a complex *multidimensional* variable based on nine indicators associated with living in poverty. These are:\n
+- Inability to afford paying for one week annual holiday away from home.\n
+- Inability to afford a meal with meat, chicken or fish (or vegetarian equivalent) every second day.\n
+- Inability to keep home adequately warm.\n
+- Inability to face unexpected expenses.\n
+- Arrears on utility bills, mortgage or rental payments, or hire purchases or other loan payments.\n
+- Inability to afford a car.\n
+- Inability to afford a telephone.\n
+- Inability to afford a TV.\n
+- Inability to afford a washing machine.\n
+Households with positive values on at least four elements of this list are classified with material deprivation.
+''')
+var_description = st.beta_expander("Get to know the other variables")
+var_description.write('''
+**Sex**: In the binary physical sense. The source data does not cover gender identity yet.\n
+**Age**: From 18 onwards. The source data assign the same age to those older than 85, hence the histogram shape.\n
+**Civil Status**: Married 'de facto' accounts for non-married co-habitants partners.\n
+**Familial Status**: Whether underage individuals are part of a household or not.\n
+**Region**: Autonomous Communities of Spain.\n
+**Population density**: Densely equals population 50000+ and 1500 inhabitants/km2 nearby. Intermediate equals population 5000+ and 300 inhabitants/km2 nearby.\n
+**Citizenship**: Those Spanish citizens born elsewhere have the label 'Spain (naturalized).\n
+**Tenure status** : Over the household accommodation. 'Tenancy at reduced rate' accounts for special cases when rent reduction takes place like social housing.\n
+**Education level**: Highest recognized educational certification.\n
+**Working status**: Main activity status as considered by the respondent.\n
+**Occupation**: Job classification inside the International Standard Classification of Occupation major groups.\n
+**Years worked**: Total number of years in employment.\n
+**Hours a week worked**: Total number of hours a week work on average in any job.\n
+**Adjusted income**: Annual household income divided by unit of consumption (1 + (other people older than 14 * 0.5) + (other people 14 or younger * 0.3)). *Intuitively*: Annual income to maintain lifestyle if living alone.\n
+**Proportion of social welfare**: Proportion of annual income coming from welfare benefits.
+''')
+
 #Subtitle for the variable options
 st.subheader('Choose a variable for display')
 
@@ -125,7 +160,7 @@ y = st.selectbox('Y', selectbox_options)
 #Only X variable option
 one_variable_button = st.button('Select only the X variable')
 
-#Defining functions
+#Defining functions - See reference in my_functions.ipynb
 def weighted_freq(data, cat_column):
     dummy = pd.get_dummies(cat_column)
     for c in dummy.columns:
@@ -361,8 +396,12 @@ if one_variable_button == False:
         pass
 
 # Subtitle for the prediction option
-st.subheader('Check out the predictive model for material deprivation!')
-#model = st.beta_expander("Expand")
+st.subheader('Check out the predictive model for multidimensional poverty!')
+
+model_description = st.beta_expander("How is it done?")
+model_description.write('''
+This model is built with a Decision Tree algorithm. Decision trees are non-parametric supervised learning techniques used for classification and regression. The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
+''')
 
 # Setting variable inputs for prediction
 with st.beta_container():
@@ -384,6 +423,7 @@ with st.beta_container():
     model_selected_adjusted_income = col3.slider('Adjusted income', -20000, 180000, -20000, 1000)
     model_selected_proportion_social_welfare = col4.slider('% social welfare', 0.0, 1.0, 0.0, 0.01)
 
+#Loading data for model training
 url2 = 'https://raw.githubusercontent.com/deividvalerius/Multidimensional-Poverty-Predictor/master/Data/to_model.csv'
 to_model = pd.read_csv(url2)
 
@@ -393,6 +433,7 @@ y = to_model.material_deprivation
 tree = DecisionTreeClassifier()
 tree.fit(X, y)
 
+#Input array for prediction
 array = []
 
 if model_selected_civil_status == 'Married':
@@ -571,6 +612,7 @@ array.append((model_selected_hours_week_worked - min(df.hours_week_worked)) / (m
 array.append((model_selected_adjusted_income - min(df.adjusted_income)) / (max(df.adjusted_income) - min(df.adjusted_income)))
 array.append((model_selected_proportion_social_welfare - min(df.proportion_social_welfare)) / (max(df.proportion_social_welfare) - min(df.proportion_social_welfare)))
 
+#Prediction result
 to_predict = np.array([array])
 prediction = tree.predict_proba(to_predict)[0][1]
 
