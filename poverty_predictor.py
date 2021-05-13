@@ -17,7 +17,7 @@ st.title('Multidimensional Poverty Predictor')
 
 # Description
 st.markdown('''
-What drives poverty in Spain? Find out about the relationship between poverty and other variables among the Spanish adult population. This app allows you to explore poverty statistics in depth. You can also try the poverty predictor model as well!\n
+What drives poverty in Spain? Find out about the relationship between poverty and other variables among the Spanish adult population. This app allows you to explore poverty statistics in depth. You can try the poverty predictor model as well!\n
 The data for this project was retrieved from the 2019 Income and Living Conditions survey conducted by the INE
 (*Instituto Nacional de Estadistica*), Spain's official agency for statistical services.\n
 * **Python libraries**: streamlit, pandas, numpy, matplotlib, seaborn, sklearn
