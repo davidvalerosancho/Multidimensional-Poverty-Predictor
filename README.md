@@ -25,6 +25,8 @@ All the notebooks are sorted in numerical order. Access the notebooks accordingl
 * Notebook 4 performs data preprocessing and feuture selection to the created variables
 * Notebook 5.1 to 5.6 applies different classification models
 
+The data can be accessed through the code in the notebooks. It can also be downloaded from the Data directory.
+
 Check out the project streamlit app!
 https://share.streamlit.io/deividvalerius/multidimensional-poverty-predictor/poverty_predictor.py
  
