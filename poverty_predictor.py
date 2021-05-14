@@ -143,7 +143,7 @@ var_description.write('''
 **Occupation**: Job classification inside the International Standard Classification of Occupation major groups.\n
 **Years worked**: Total number of years in employment.\n
 **Hours a week worked**: Total number of hours a week work on average in any job.\n
-**Adjusted income**: Annual household income divided by unit of consumption (1 + (other people older than 14 x 0.5) + (other people 14 or younger x 0.3)). *Intuitively*: Annual income to maintain lifestyle if living alone.\n
+**Adjusted income**: Annual household income divided by unit of consumption (1 + (other people older than 13 x 0.5) + (other people 13 or younger x 0.3)). *Intuitively*: Annual income to maintain lifestyle if living alone.\n
 **Proportion of social welfare**: Proportion of annual income coming from welfare benefits.
 ''')
 
@@ -304,8 +304,7 @@ with st.beta_container():
         if str(selected_df[variable_names[x]].dtype) == 'object':
             barplot()
         else:
-            bins = st.slider('bins', 1, 100, 68)
-            histplot(bins=bins)
+            histplot()
 
 #Showing statistics
 stats = st.beta_expander("Descriptive statistics")
@@ -346,7 +345,7 @@ else:
         stats.write(f"{' '.join(string_list)}")
     else:
         weighted_var = pd.Series(weighted_num(selected_df, selected_df[variable_names[x]]))
-        stats.write(f"**Mean**: {round(weighted_var.mean(), 2)}, **StDv**: {round(weighted_var.std(), 2)}, **Min**: {round(weighted_var.min(), 2)}, **1stQ**: {round(weighted_var.quantile(0.25), 2)}, **Median**: {round(weighted_var.median(), 2)}, **3stQ**: {round(weighted_var.quantile(0.75), 2)}, **Max**: {round(weighted_var.max(), 2)}")
+        stats.write(f"**Mean**: {round(weighted_var.mean(), 2)}, **StDv**: {round(weighted_var.std(), 2)}, **Min**: {round(weighted_var.min(), 2)}, **1stQ**: {round(weighted_var.quantile(0.25), 2)}, **Median**: {round(weighted_var.median(), 2)}, **3rdQ**: {round(weighted_var.quantile(0.75), 2)}, **Max**: {round(weighted_var.max(), 2)}")
 
 # Hypothesis test
 if one_variable_button == False:
