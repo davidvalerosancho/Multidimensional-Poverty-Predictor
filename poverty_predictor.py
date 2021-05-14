@@ -90,7 +90,7 @@ selected_years_worked = st.sidebar.slider('Years worked', int(df.years_worked.mi
 selected_hours_week_worked = st.sidebar.slider('Hours a week worked', int(df.hours_week_worked.min()), int(df.hours_week_worked.max()), (int(df.hours_week_worked.min()), int(df.hours_week_worked.max())))
 
 #Sidebar - Adjusted income
-selected_adjusted_income = st.sidebar.slider('Adjusted income', -20000, 180000, (-20000, 180000), 1000)
+selected_adjusted_income = st.sidebar.slider('Adjusted income', 0, 180000, (-20000, 180000), 1000)
 
 #Sidebar - Proportion of social welfare
 selected_proportion_social_welfare = st.sidebar.slider('Proportion of social welfare', 0.0, 1.0, (0.0, 1.0), 0.01)
@@ -418,7 +418,7 @@ with st.beta_container():
     model_selected_age = col4.slider('Age', int(df.age.min()), int(df.age.max()))
     model_selected_years_worked = col1.slider('Years worked', int(df.years_worked.min()), int(df.years_worked.max()))
     model_selected_hours_week_worked = col2.slider('Hours a week worked', int(df.hours_week_worked.min()), int(df.hours_week_worked.max()))
-    model_selected_adjusted_income = col3.slider('Adjusted income', -20000, 180000, -20000, 1000)
+    model_selected_adjusted_income = col3.slider('Adjusted income', 0, 180000, 0, 1000)
     model_selected_proportion_social_welfare = col4.slider('% social welfare', 0.0, 1.0, 0.0, 0.01)
 
 #Loading data for model training
