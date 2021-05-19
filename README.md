@@ -1,6 +1,6 @@
 # Multidimensional-Poverty-Predictor
 
-Final Project for my DS and Big Data master course.
+Final Project for my Data Science master course.
 
 Welcome to Multidimensional Poverty Predictor! This project applies machine learning to the study of poverty. Using the EU-SILC multidimensional material deprivation indicator as target variable it aims at building a prediction model based on relevant sociodemographic variables.
 
