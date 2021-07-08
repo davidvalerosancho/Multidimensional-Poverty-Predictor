@@ -15,7 +15,7 @@ The following libraries are needed to replicate the repository:
 * gdown
 * streamlit
 
-Please head down to memory.pdf for a datailed explanation of the project.
+Please head down to memory.pdf for a detailed explanation of the project.
 
 All the notebooks are sorted in numerical order. Access the notebooks accordingly and follow along with the memory.
 
